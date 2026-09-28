@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { deleteOldDocuments } from "@/firebase/cleanup";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const secret = searchParams.get("secret");

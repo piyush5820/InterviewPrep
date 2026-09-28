@@ -1,8 +1,9 @@
 // lib/cleanup.ts
-import { db } from "./firebaseAdmin";
+import { getAdminDb } from "./firebaseAdmin";
 import { Timestamp } from "firebase-admin/firestore";
 
 export async function deleteOldDocuments(collectionName: string, days: number = 7) {
+  const db = getAdminDb();
   const cutoffDate = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
 
   const snapshot = await db
