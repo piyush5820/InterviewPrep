@@ -1,0 +1,265 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  TIDE POOL STUDIO — design tokens
+  Calm, professional, modern. Deep teal + cobalt + warm coral on mist.
+  No legacy yellow / hard-offset brutalist shadows remain.
+*/
+
+:root {
+  --bg: #f3f6f8;
+  --bg-subtle: #eaf0f4;
+  --surface: #ffffff;
+  --surface-2: #f0f4f7;
+  --surface-3: #e6edf2;
+
+  --ink: #0f1e2e;
+  --ink-2: #33475e;
+  --muted: #5a6d80;
+  --faint: #8ca0b3;
+  --border: #dde5ec;
+  --border-strong: #c6d2dd;
+  --ring: rgba(15, 118, 110, 0.24);
+
+  --primary: #0f766e;
+  --primary-strong: #0b5d57;
+  --primary-soft: #d9efea;
+  --primary-ink: #063f3a;
+
+  --secondary: #2e4bff;
+  --secondary-strong: #1e38d6;
+  --secondary-soft: #e3e8ff;
+
+  --accent: #ff6a3d;
+  --accent-strong: #d9552b;
+  --accent-soft: #ffe8dd;
+
+  --success: #15803d;
+  --success-bg: #dff5e3;
+  --warning: #9a5a0a;
+  --warning-bg: #fff0d2;
+  --error: #d92d20;
+  --error-bg: #fde3e1;
+  --info: #027fb7;
+  --info-bg: #dcf1fd;
+
+  --dark: #0f1e2e;
+  --dark-2: #172b43;
+  --dark-3: #21405f;
+
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+  --r-2xl: 28px;
+
+  --shadow-xs: 0 1px 2px rgba(15, 30, 46, 0.06);
+  --shadow-sm: 0 2px 10px rgba(15, 30, 46, 0.06), 0 1px 3px rgba(15, 30, 46, 0.08);
+  --shadow-md: 0 8px 24px rgba(15, 30, 46, 0.09), 0 2px 8px rgba(15, 30, 46, 0.06);
+  --shadow-lg: 0 18px 48px rgba(15, 30, 46, 0.14), 0 4px 16px rgba(15, 30, 46, 0.08);
+  --shadow-glow-teal: 0 0 0 4px rgba(15, 118, 110, 0.14), 0 12px 32px rgba(15, 118, 110, 0.22);
+
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* focus */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* selection */
+::selection {
+  background: var(--primary-soft);
+  color: var(--primary-ink);
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #c2cfdb;
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #9db0c2; }
+.custom-scrollbar::-webkit-scrollbar { width: 8px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { border: none; }
+
+.container { overflow: hidden; }
+
+/* surfaces */
+.surface-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+}
+.surface-card-hover {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.surface-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.soft-panel {
+  background: linear-gradient(180deg, #ffffff 0%, #f4f8fa 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+/* buttons share motion 150-300ms */
+.btn-transition { transition: all 200ms ease; }
+
+/* animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn { animation: fadeIn 0.28s ease-out forwards; }
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-rise { animation: riseIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float-soft { animation: floatSoft 6s ease-in-out infinite; }
+
+@keyframes marquee-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee-x 32s linear infinite; }
+.animate-marquee:hover { animation-play-state: paused; }
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+.animate-pulse-ring { animation: pulse-ring 1.8s ease-out infinite; }
+
+@keyframes orbDrift {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  50% { transform: translate(40px, -30px) scale(1.12); opacity: 0.7; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+}
+.ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  animation: orbDrift 12s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes flash-highlight {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.15; }
+  100% { opacity: 0; }
+}
+
+/* keep legacy class names working but remapped to new system */
+.space-orb {
+  position: absolute;
+  top: 30%;
+  left: 55%;
+  width: 22rem;
+  height: 22rem;
+  background: radial-gradient(circle, rgba(15,118,110,0.32), rgba(46,75,255,0.18), transparent 70%);
+  border-radius: 9999px;
+  filter: blur(90px);
+  animation: orbDrift 11s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* prose readability on light */
+.prose { color: var(--ink-2); }
+.prose strong { color: var(--ink); }
+
+/* recharts polish */
+.recharts-cartesian-axis-tick text { font-family: var(--font-body); }
+.recharts-tooltip-wrapper { outline: none !important; }
+
+/* print: resume builder */
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+}
+
+/* ── traverse-loop blur balls: enter left, sink right, loop ── */
+.traverse-ball {
+  position: absolute;
+  left: 0;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation-name: traverse;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes traverse {
+  0%   { transform: translate(-28vw, 36px) scale(0.9); opacity: 0; }
+  10%  { opacity: 0.75; }
+  45%  { transform: translate(38vw, -28px) scale(1.06); opacity: 0.7; }
+  70%  { transform: translate(72vw, 10px) scale(1); opacity: 0.55; }
+  90%  { opacity: 0.35; }
+  100% { transform: translate(112vw, 30px) scale(0.94); opacity: 0; }
+}
+
+/* ── vivid traverse variant: denser glow, tighter blur, lingering passes ── */
+.traverse-ball-vivid {
+  position: absolute;
+  left: 0;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation-name: traverse-vivid;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes traverse-vivid {
+  0%   { transform: translate(-28vw, 36px) scale(0.9); opacity: 0; }
+  8%   { opacity: 0.95; }
+  45%  { transform: translate(38vw, -28px) scale(1.06); opacity: 0.9; }
+  70%  { transform: translate(72vw, 10px) scale(1); opacity: 0.75; }
+  92%  { opacity: 0.4; }
+  100% { transform: translate(112vw, 30px) scale(0.94); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .traverse-ball, .traverse-ball-vivid, .animate-marquee, .animate-float-soft, .ambient-orb {
+    animation: none !important;
+  }
+}
